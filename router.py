@@ -1,21 +1,26 @@
+#!/usr/bin/env python
 from mididings import *
 
 config(
+        start_delay = 0.5,
         in_ports = [
-            ('bs2in', '24:0'),
-            ('dtin', '20:0'),
+            ('bs2in', 'Bass Station II.*'),
+            ('dtin', 'Elektron Digitone.*'),
             ],
         out_ports = [
-            ('dtout', '20:0'),
-            ('bs2out', '24:0'),
+            ('bs2out', 'Bass Station II.*'),
+            ('dtout', 'Elektron Digitone.*'),
             ],
-)
+        )
 
 run(
-    Print() >> [
-        ChannelFilter(10) >> Filter(NOTE) >> Output('dtout', 10),
-        ChannelFilter(10) >> Filter(CTRL|PITCHBEND|AFTERTOUCH) >> Output('bs2out', 10),
-        ChannelFilter(9) >> Output('bs2out', 10)
-        ]
-)
-
+        # Print('pre', 'in') >>
+        [
+            PortFilter('bs2in') >> [
+                Filter(NOTE) >> Output('dtout', 10),
+                Filter(CTRL|PITCHBEND|AFTERTOUCH) >> Output('bs2out', 12)
+                ],
+            PortFilter('dtin') >> ChannelFilter(12) >> Output('bs2out', 12),
+            ]
+        # >> Print('post', 'out')
+        )
