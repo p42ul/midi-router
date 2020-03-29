@@ -1,5 +1,6 @@
-#!/usr/bin/env python
+#!/usr/bin/env python2
 from mididings import *
+
 
 config(
         start_delay = 0.5,
@@ -14,6 +15,8 @@ config(
         )
 
 run(
+        # Use the Print statements for debugging if necessary.
+        # Otherwise, runs silently.
         # Print('pre', 'in') >>
         [
             PortFilter('bs2in') >> [
