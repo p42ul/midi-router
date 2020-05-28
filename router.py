@@ -11,6 +11,7 @@ config(
         out_ports = [
             ('bs2out', 'Bass Station II.*'),
             ('dtout', 'Elektron Digitone.*'),
+            ('mioout', 'mio.*'),
             ],
         )
 
@@ -31,7 +32,8 @@ run(
             PortFilter('dtin') >> [
                     ChannelFilter(12),
                     Filter(SYSRT_CLOCK),
-            ] >> Output('bs2out', 12)
+            ] >> Output('bs2out', 12),
+            PortFilter('dtin') >> Filter(SYSRT) >> Output('mioout', 1),
         ]
         # >> Print('post', 'out')
         )
