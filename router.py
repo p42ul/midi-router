@@ -5,13 +5,13 @@ from mididings import *
 config(
         start_delay = 0.5,
         in_ports = [
-            ('bs2in', 'Bass Station II.*'),
-            ('dtin', 'Elektron Digitone.*'),
+            ('bs2in', '.*Bass Station II.*'),
+            ('dtin', '.*Elektron Digitone.*'),
             ],
         out_ports = [
-            ('bs2out', 'Bass Station II.*'),
-            ('dtout', 'Elektron Digitone.*'),
-            ('mioout', 'mio.*'),
+            ('bs2out', '.*Bass Station II.*'),
+            ('dtout', '.*Elektron Digitone.*'),
+            ('mioout', '.*mio.*'),
             ],
         )
 

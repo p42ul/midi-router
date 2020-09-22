@@ -1,0 +1,15 @@
+# Systemd service for MIDI router.
+# You'll need to change the ExecStart and User lines to match your environment.
+[Unit]
+Description=MIDI Router
+After=network.target
+StartLimitIntervalSec=0
+[Service]
+Type=simple
+Restart=always
+RestartSec=1
+User=pi
+ExecStart=/usr/bin/env bash /home/pi/Coding/midi-router/autorestart.sh
+
+[Install]
+WantedBy=multi-user.target
