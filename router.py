@@ -6,12 +6,13 @@ config(
         start_delay = 0.5,
         in_ports = [
             ('bs2in', '.*Bass Station II.*'),
-            ('dtin', '.*Elektron Digitone.*'),
+            ('dtin',  '.*Elektron Digitone.*'),
             ],
         out_ports = [
             ('bs2out', '.*Bass Station II.*'),
-            ('dtout', '.*Elektron Digitone.*'),
+            ('dtout',  '.*Elektron Digitone.*'),
             ('mioout', '.*mio.*'),
+            ('rdout',  '.*RD Series MIDI 1.*'),
             ],
         )
 
@@ -35,6 +36,7 @@ run(
                     Filter(SYSRT_CLOCK),
             ] >> Output('bs2out', 12),
             PortFilter('dtin') >> Filter(SYSRT) >> Output('mioout', 1),
+            PortFilter('dtin') >> ChannelFilter(2) >> Output('rdout', 1),
         ]
         # >> Print('post', 'out')
         )
